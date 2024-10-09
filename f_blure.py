@@ -5,7 +5,7 @@ def blurf(inputvid):
     outvid = os.path.splitext(inputvid)[0] + "_anananimus-_-.mp4"
 
     cap = cv2.VideoCapture(inputvid)
-    model = cv2.CascadeClassifier('haarcascade_frontalface_default.xml') # сначала вставил расшириную, думал будет лучше работать, а она даж  лицо джереми не распознала :(
+    model = cv2.CascadeClassifier('haarcascade_frontalface_extended.xml') 
     out = cv2.VideoWriter(outvid, cv2.VideoWriter_fourcc(*'mp4v'), 20.0, (int(cap.get(3)), int(cap.get(4))))  
 
     while(True):
@@ -18,7 +18,7 @@ def blurf(inputvid):
 
         for (x, y, w, h) in faces:
             face = frame[y:y+h, x:x+w]
-            blurred = cv2.blur(face, (100, 100))
+            blurred = cv2.blur(face, (10, 10))
             frame[y:y+h, x:x+w] = blurred
 
         out.write(frame)
